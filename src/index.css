@@ -83,8 +83,12 @@
 
 @layer components {
   .glass-card {
-    @apply bg-card/80 backdrop-blur-sm border border-glass-border rounded-xl;
+    @apply bg-card/80 backdrop-blur-sm border border-glass-border rounded-xl transition-all duration-300;
     background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--navy-deep)) 100%);
+  }
+
+  .glass-card:hover {
+    @apply border-primary/20;
   }
 
   .skill-tag {
@@ -144,47 +148,16 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-cyan-400;
   }
-
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.6s ease-out forwards;
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
 }
 
+/* Subtle fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 20px hsl(193 100% 50% / 0.3);
-  }
-  to {
-    box-shadow: 0 0 40px hsl(193 100% 50% / 0.5);
   }
 }

@@ -36,29 +36,29 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border mb-8 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border mb-8 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             <span className="text-sm text-muted-foreground">Open to opportunities</span>
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-4 opacity-0 animate-[fadeIn_0.5s_ease-out_0.1s_forwards]">
             Hi, I'm <span className="text-gradient italic">Kartik</span>
           </h1>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-semibold text-foreground/90 mb-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-semibold text-foreground/90 mb-6 opacity-0 animate-[fadeIn_0.5s_ease-out_0.15s_forwards]">
             Business Analyst
           </h2>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 opacity-0 animate-[fadeIn_0.5s_ease-out_0.2s_forwards]">
             Transforming data into actionable insights with expertise in Power BI, SQL, Python, and AI tools
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <div className="flex flex-col sm:flex-row items-center gap-4 mb-12 opacity-0 animate-[fadeIn_0.5s_ease-out_0.25s_forwards]">
             <Button
               size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-semibold"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-semibold transition-all duration-300 hover:scale-[1.02]"
               onClick={() => scrollToSection('projects')}
             >
               View Projects
@@ -67,7 +67,7 @@ const HeroSection = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-border bg-muted/30 hover:bg-muted/50 px-8 py-6 text-base font-semibold"
+              className="border-border bg-muted/30 hover:bg-muted/50 px-8 py-6 text-base font-semibold transition-all duration-300 hover:scale-[1.02]"
               onClick={() => scrollToSection('contact')}
             >
               <Mail className="mr-2 w-5 h-5" />
@@ -76,7 +76,7 @@ const HeroSection = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center gap-4 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+          <div className="flex items-center gap-4 opacity-0 animate-[fadeIn_0.5s_ease-out_0.3s_forwards]">
             <a
               href="https://github.com/Kartik97660"
               target="_blank"
