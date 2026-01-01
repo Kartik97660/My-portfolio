@@ -13,13 +13,11 @@ const CountUp = ({ end, duration = 2000, suffix = '' }: { end: number; duration?
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
 
-            // Easing function for smooth animation
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-
-            setCount(Math.floor(easeOutQuart * end));
-
             if (progress < 1) {
+              setCount(Math.floor(Math.random() * 100));
               window.requestAnimationFrame(step);
+            } else {
+              setCount(end);
             }
           };
           window.requestAnimationFrame(step);
@@ -43,21 +41,21 @@ const highlights = [
   {
     value: 2,
     suffix: '+',
-    duration: 1000,
+    duration: 700,
     title: 'Years Experience',
     description: 'In sales, marketing execution, and analytics-driven decision support',
   },
   {
     value: 10,
     suffix: '+',
-    duration: 1000,
+    duration: 700,
     title: 'Technical Skills',
     description: 'Python, SQL, Power BI, Excel, Tableau, Azure, and more',
   },
   {
     value: 4,
     suffix: '+',
-    duration: 1000,
+    duration: 700,
     title: 'Data Projects',
     description: 'End-to-end analytics solutions with Power BI and SQL',
   },
