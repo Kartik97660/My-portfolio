@@ -15,7 +15,7 @@ const projects = [
       'Pricing and mileage insights',
       'Seller behavior patterns',
     ],
-    tech: ['Power BI', 'SQL', 'DAX'],
+    tech: ['Power BI', 'SQL', 'DAX', 'EXCEL'],
     github: 'https://github.com/Kartik97660',
   },
   {
@@ -84,7 +84,7 @@ const ProjectsSection = () => {
             <Link
               key={project.id}
               to={`/project/${project.id}`}
-              className="glass-card p-6 group hover:border-primary/30 transition-all duration-300"
+              className="glass-card p-6 group hover:border-primary/60 hover:shadow-md hover:shadow-primary/10 transition-all duration-300"
             >
               {/* Header */}
               <div className="flex items-start gap-4 mb-4">
@@ -97,6 +97,15 @@ const ProjectsSection = () => {
                   </h3>
                   <p className="text-sm text-muted-foreground">{project.date}</p>
                 </div>
+              </div>
+
+              {/* Tech Stack */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.tech.map((tech) => (
+                  <span key={tech} className="tech-badge">
+                    {tech}
+                  </span>
+                ))}
               </div>
 
               {/* Description */}
@@ -114,19 +123,11 @@ const ProjectsSection = () => {
                 ))}
               </ul>
 
-              {/* Tech Stack */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech) => (
-                  <span key={tech} className="tech-badge">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+
 
               {/* GitHub Link */}
-              <div className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                <Github className="w-4 h-4" />
-                <span>Code</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 text-sm font-medium text-muted-foreground border border-transparent transition-all duration-300 group-hover:border-primary hover:bg-primary hover:text-primary-foreground hover:!border-primary">
+                <span>Project Details</span>
               </div>
             </Link>
           ))}

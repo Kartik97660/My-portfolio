@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -15,33 +16,43 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      const sections = navItems.map(item => item.href.slice(1));
-      const scrollPosition = window.scrollY + 100;
+      if (isHomePage) {
+        const sections = navItems.map(item => item.href.slice(1));
+        const scrollPosition = window.scrollY + 100;
 
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element && element.offsetTop <= scrollPosition) {
-          setActiveSection(section);
-          break;
+        for (const section of sections.reverse()) {
+          const element = document.getElementById(section);
+          if (element && element.offsetTop <= scrollPosition) {
+            setActiveSection(section);
+            break;
+          }
         }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   const scrollToSection = (href: string) => {
-    const element = document.getElementById(href.slice(1));
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
     setIsOpen(false);
+
+    if (isHomePage) {
+      const element = document.getElementById(href.slice(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate('/' + href);
+    }
   };
 
   return (
@@ -49,10 +60,10 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-1 font-display font-bold text-xl">
+          <button onClick={() => scrollToSection('#home')} className="flex items-center gap-1 font-display font-bold text-xl">
             <span className="text-foreground">Kartik</span>
             <span className="text-primary">Pathak</span>
-          </a>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
@@ -60,7 +71,7 @@ const Navbar = () => {
               <button
                 key={item.label}
                 onClick={() => scrollToSection(item.href)}
-                className={`nav-link ${activeSection === item.href.slice(1) ? 'active' : ''}`}
+                className={`nav-link ${isHomePage && activeSection === item.href.slice(1) ? 'active' : ''}`}
               >
                 {item.label}
               </button>

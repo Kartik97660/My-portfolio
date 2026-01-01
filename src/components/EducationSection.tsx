@@ -8,6 +8,7 @@ const education = [
     period: 'June 2024 - June 2026',
     gpa: '8.3',
     status: 'Current',
+    link: 'https://www.sibmnagpur.edu.in/',
     highlights: [
       'Specialization in Business Analytics',
       'Focus on data-driven decision making',
@@ -21,6 +22,7 @@ const education = [
     period: 'June 2017 - August 2021',
     gpa: '8.67',
     status: 'Completed',
+    link: 'https://www.sbjit.edu.in/',
     highlights: [
       'Strong foundation in analytical thinking',
       'Technical problem-solving skills',
@@ -52,14 +54,18 @@ const EducationSection = () => {
               </div>
 
               {/* Card */}
-              <div className="flex-1 glass-card p-6 md:p-8">
+              <a
+                href={edu.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 glass-card p-6 md:p-8 hover:border-primary/60 hover:shadow-md hover:shadow-primary/10 transition-all duration-300 block"
+              >
                 {/* Header Row - Status & GPA */}
                 <div className="flex items-center justify-between mb-5">
-                  <span className={`px-3 py-1 rounded-md text-xs font-semibold ${
-                    edu.status === 'Current' 
-                      ? 'bg-primary/20 text-primary' 
+                  <span className={`px-3 py-1 rounded-md text-xs font-semibold ${edu.status === 'Current'
+                      ? 'bg-primary/20 text-primary'
                       : 'bg-muted text-muted-foreground'
-                  }`}>
+                    }`}>
                     {edu.status}
                   </span>
                   <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
@@ -100,7 +106,7 @@ const EducationSection = () => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </a>
             </div>
           ))}
         </div>

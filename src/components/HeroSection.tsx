@@ -1,4 +1,4 @@
-import { ArrowRight, Mail, Github, Linkedin } from 'lucide-react';
+import { ArrowRight, Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
@@ -64,15 +64,7 @@ const HeroSection = () => {
               View Projects
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-border bg-muted/30 hover:bg-muted/50 px-8 py-6 text-base font-semibold transition-all duration-300 hover:scale-[1.02]"
-              onClick={() => scrollToSection('contact')}
-            >
-              <Mail className="mr-2 w-5 h-5" />
-              Get in Touch
-            </Button>
+
           </div>
 
           {/* Social Links */}
@@ -93,12 +85,7 @@ const HeroSection = () => {
             >
               <Linkedin className="w-5 h-5" />
             </a>
-            <a
-              href="mailto:kartikpathak2799@gmail.com"
-              className="p-3 rounded-xl bg-muted/50 border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 transition-all duration-300"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
+
           </div>
         </div>
       </div>
