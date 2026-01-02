@@ -13,7 +13,7 @@ const HeroSection = () => {
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_hsl(200_50%_15%)_0%,_hsl(220_40%_7%)_60%)]" />
-      
+
       {/* Animated wave lines */}
       <div className="absolute bottom-0 left-0 right-0 h-48 opacity-20">
         <svg viewBox="0 0 1440 320" className="absolute bottom-0 w-full">
@@ -58,13 +58,12 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row items-center gap-4 mb-12 opacity-0 animate-[fadeIn_0.5s_ease-out_0.25s_forwards]">
             <Button
               size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-semibold transition-all duration-300 hover:scale-[1.02]"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 min-w-[170px] h-11 px-8 text-base font-semibold transition-all duration-300 hover:scale-[1.02]"
               onClick={() => scrollToSection('projects')}
             >
               View Projects
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-
           </div>
 
           {/* Social Links */}

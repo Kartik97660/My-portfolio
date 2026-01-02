@@ -50,14 +50,14 @@ const highlights = [
     suffix: '+',
     duration: 700,
     title: 'Technical Skills',
-    description: 'Python, SQL, Power BI, Excel, Tableau, Azure, and more',
+    description: 'Python, SQL, Power BI, Excel, Tableau, Azure, and Gen AI tools',
   },
   {
-    value: 4,
+    value: 14,
     suffix: '+',
     duration: 700,
-    title: 'Data Projects',
-    description: 'End-to-end analytics solutions with Power BI and SQL',
+    title: 'Projects',
+    description: 'End-to-end Projects in Analytics & Gen AI ',
   },
 ];
 
@@ -66,14 +66,14 @@ const AboutSection = () => {
     <section id="about" className="py-12 md:py-20">
       <div className="container mx-auto px-4">
         {/* Highlight Cards */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-3 gap-3 md:gap-6 max-w-5xl mx-auto">
           {highlights.map((item) => (
-            <div key={item.title} className="glass-card p-6 group flex flex-col items-center text-center">
-              <span className="text-4xl font-display font-bold text-primary">
+            <div key={item.title} className="glass-card p-2 md:p-6 group flex flex-col items-center text-center">
+              <span className="text-xl md:text-4xl font-display font-bold text-primary">
                 <CountUp end={item.value} suffix={item.suffix} duration={item.duration} />
               </span>
-              <h3 className="text-lg font-semibold mt-3 mb-2">{item.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
+              <h3 className="text-xs md:text-lg font-semibold mt-1 md:mt-3 mb-1 md:mb-2 leading-tight">{item.title}</h3>
+              <p className="text-[10px] md:text-sm text-muted-foreground mb-1 md:mb-4 hidden md:block">{item.description}</p>
             </div>
           ))}
         </div>

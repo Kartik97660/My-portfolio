@@ -50,23 +50,23 @@ const SkillsSection = () => {
         <h2 className="section-title">
           Technical <span className="text-gradient">Skills</span>
         </h2>
-        <p className="section-subtitle">
+        <p className="section-subtitle hidden md:block">
           Technologies and tools I work with to deliver data-driven solutions
         </p>
 
         {/* Technical Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
+        <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 max-w-6xl mx-auto mb-16 pb-4 md:pb-0">
           {skillCategories.map((category) => (
-            <div key={category.title} className="glass-card p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`icon-box ${category.color}`}>
+            <div key={category.title} className="glass-card p-4 md:p-6 min-w-[60vw] md:min-w-0 aspect-square md:aspect-auto snap-center flex flex-col justify-center md:block">
+              <div className="flex flex-col md:flex-row items-center md:items-center gap-3 mb-3 md:mb-4 text-center md:text-left">
+                <div className={`icon-box ${category.color} mb-2 md:mb-0`}>
                   <category.icon className="w-5 h-5" />
                 </div>
-                <h3 className="font-semibold">{category.title}</h3>
+                <h3 className="font-semibold text-sm md:text-base">{category.title}</h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-center md:justify-start gap-2">
                 {category.skills.map((skill) => (
-                  <span key={skill} className="skill-tag">
+                  <span key={skill} className="skill-tag text-xs md:text-sm">
                     {skill}
                   </span>
                 ))}

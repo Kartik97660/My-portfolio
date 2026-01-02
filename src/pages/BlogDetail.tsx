@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { blogs } from '@/data/blogs';
-import { ArrowLeft, Calendar, Clock, Tag, User } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar, Clock, Tag, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 
@@ -17,11 +17,12 @@ const BlogDetail = () => {
                 <div className="flex-grow flex items-center justify-center">
                     <div className="text-center">
                         <h1 className="text-2xl font-bold mb-4">Blog Post Not Found</h1>
-                        <Link to="/blogs">
-                            <Button>
-                                <ArrowLeft className="w-4 h-4 mr-2" />
-                                Back to Blogs
-                            </Button>
+                        <Link
+                            to="/blogs"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 font-medium text-sm w-fit"
+                        >
+                            <ArrowLeft className="w-4 h-4" />
+                            Back to Blogs
                         </Link>
                     </div>
                 </div>
@@ -50,7 +51,7 @@ const BlogDetail = () => {
         <div className="min-h-screen bg-background">
             <Navbar />
 
-            <main className="pt-24 pb-20">
+            <main className="pt-20 pb-12 md:pt-24 md:pb-20">
                 {/* Hero / Header Image */}
                 <div className="w-full h-[40vh] md:h-[50vh] relative mb-12">
                     <img
@@ -61,20 +62,21 @@ const BlogDetail = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
 
                     <div className="absolute bottom-0 left-0 w-full p-4 md:p-12 container mx-auto">
-                        <Link to="/blogs" className="inline-block mb-4">
-                            <Button variant="outline" size="sm" className="bg-background/20 backdrop-blur-md border-white/20 hover:bg-background/40">
-                                <ArrowLeft className="w-4 h-4 mr-2" />
-                                Back to Blogs
-                            </Button>
+                        <Link
+                            to="/blogs"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 font-medium text-sm w-fit mb-4 md:mb-6"
+                        >
+                            <ArrowLeft className="w-4 h-4" />
+                            Back to Blogs
                         </Link>
 
                         {/* Breadcrumb */}
-                        <div className="flex items-center gap-2 text-sm text-white/80 mb-6 font-mono">
+                        <div className="flex items-center gap-1.5 md:gap-2 text-[10px] md:text-sm text-white/80 mb-4 md:mb-6 font-mono overflow-hidden">
                             <span>Home</span>
                             <span className="opacity-40">/</span>
                             <span>Blogs</span>
                             <span className="opacity-40">/</span>
-                            <span className="text-white font-medium truncate max-w-[200px] md:max-w-md">
+                            <span className="text-white font-medium truncate flex-1 md:flex-none md:max-w-md">
                                 {blog.title}
                             </span>
                         </div>
@@ -87,21 +89,21 @@ const BlogDetail = () => {
                             ))}
                         </div>
 
-                        <h1 className="text-3xl md:text-5xl font-display font-bold mb-6 max-w-4xl leading-tight">
+                        <h1 className="text-2xl md:text-3xl lg:text-5xl font-display font-bold mb-4 md:mb-6 max-w-4xl leading-tight">
                             {blog.title}
                         </h1>
 
-                        <div className="flex flex-wrap items-center gap-6 text-sm md:text-base text-muted-foreground">
-                            <div className="flex items-center gap-2">
-                                <User className="w-4 h-4" />
+                        <div className="flex flex-wrap items-center gap-4 md:gap-6 text-xs md:text-base text-muted-foreground">
+                            <div className="flex items-center gap-1.5 md:gap-2">
+                                <User className="w-3.5 h-3.5 md:w-4 md:h-4" />
                                 <span>{blog.author}</span>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <Calendar className="w-4 h-4" />
+                            <div className="flex items-center gap-1.5 md:gap-2">
+                                <Calendar className="w-3.5 h-3.5 md:w-4 md:h-4" />
                                 <span>{blog.date}</span>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <Clock className="w-4 h-4" />
+                            <div className="flex items-center gap-1.5 md:gap-2">
+                                <Clock className="w-3.5 h-3.5 md:w-4 md:h-4" />
                                 <span>{blog.readTime}</span>
                             </div>
                         </div>
@@ -114,6 +116,45 @@ const BlogDetail = () => {
                         {renderContent(blog.content)}
                     </div>
                 </article>
+
+                {/* Recommended Blogs */}
+                <section className="container mx-auto px-4 max-w-5xl mt-20 md:mt-32">
+                    <div className="flex items-center gap-2 mb-8">
+                        <h2 className="text-2xl font-display font-bold">RELATED ARTICLES</h2>
+                        <ArrowRight className="w-5 h-5 text-primary" />
+                    </div>
+
+                    <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x">
+                        {blogs
+                            .filter(b => b.id !== blog.id)
+                            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                            .slice(0, 3)
+                            .map((relatedBlog) => (
+                                <Link
+                                    key={relatedBlog.id}
+                                    to={`/blog/${relatedBlog.id}`}
+                                    className="group flex flex-col bg-card border border-border/50 rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-300 min-w-[85vw] md:min-w-0 snap-center"
+                                >
+                                    <div className="relative h-48 overflow-hidden">
+                                        <img
+                                            src={relatedBlog.image}
+                                            alt={relatedBlog.title}
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                    </div>
+                                    <div className="p-4 flex flex-col flex-grow">
+                                        <h3 className="font-display font-bold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                                            {relatedBlog.title}
+                                        </h3>
+                                        <div className="flex items-center gap-2 text-xs text-muted-foreground mt-auto">
+                                            <Calendar className="w-3.5 h-3.5" />
+                                            <span>{relatedBlog.date}</span>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                    </div>
+                </section>
             </main>
 
             <Footer />

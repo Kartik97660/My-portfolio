@@ -4,12 +4,14 @@ import { ArrowLeft, Github, Calendar, TrendingUp, BarChart3, LineChart, Database
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import carDekhoIcon from '../../icon/icon.webp';
 
 const projects = {
   'cardekho-analysis': {
     title: 'CarDekho Used Cars Analysis',
     date: 'October 2025',
-    icon: TrendingUp,
+    icon: null,
+    iconImage: carDekhoIcon,
     iconColor: 'bg-cyan-500/20 text-cyan-400',
     description: 'An end-to-end data analytics case study built using a real-world used car dataset inspired by CarDekho listings.',
     tech: ['Power BI', 'SQL', 'DAX', 'Excel'],
@@ -254,6 +256,7 @@ interface Project {
   title: string;
   date: string;
   icon: any;
+  iconImage?: string;
   iconColor: string;
   description: string;
   fullDescription?: string;
@@ -303,7 +306,7 @@ const ProjectDetail = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <main className="pt-24 pb-20">
+      <main className="pt-20 pb-12 md:pt-24 md:pb-20">
         <div className="container mx-auto px-4">
           {/* Back Button */}
           <Link
@@ -321,29 +324,33 @@ const ProjectDetail = () => {
           </Link>
 
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6 font-mono">
-            <span className="opacity-60">Projects</span>
+          <div className="flex items-center gap-1.5 md:gap-2 text-[10px] md:text-sm text-muted-foreground mb-4 md:mb-6 font-mono overflow-hidden">
+            <span className="opacity-60 whitespace-nowrap">Projects</span>
             <span className="opacity-40">/</span>
-            <span className={(location.state as any)?.categoryTitle ? "text-foreground" : "opacity-60"}>
+            <span className={`whitespace-nowrap truncate max-w-[80px] md:max-w-none ${(location.state as any)?.categoryTitle ? "text-foreground" : "opacity-60"}`}>
               {(location.state as any)?.categoryTitle || 'All Categories'}
             </span>
             <span className="opacity-40">/</span>
-            <span className="text-primary font-medium truncate max-w-[200px] md:max-w-md">
+            <span className="text-primary font-medium truncate flex-1 md:flex-none md:max-w-md">
               {project.title}
             </span>
           </div>
 
           {/* Header */}
           <div className="max-w-4xl mx-auto">
-            <div className="flex items-start gap-4 mb-6">
-              <div className={`icon-box-lg ${project.iconColor}`}>
-                <IconComponent className="w-6 h-6" />
+            <div className="flex items-start gap-3 md:gap-4 mb-6">
+              <div className={`flex items-center justify-center rounded-xl shrink-0 ${project.iconColor} w-10 h-10 md:w-14 md:h-14 overflow-hidden`}>
+                {project.iconImage ? (
+                  <img src={project.iconImage} alt={project.title} className="w-full h-full object-cover" />
+                ) : (
+                  IconComponent && <IconComponent className="w-5 h-5 md:w-7 md:h-7" />
+                )}
               </div>
-              <div className="flex-1 flex flex-col md:flex-row justify-between items-start gap-4 md:gap-8">
+              <div className="flex-1 flex flex-col md:flex-row justify-between items-start gap-3 md:gap-8">
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-display font-bold">{project.title}</h1>
-                  <div className="flex items-center gap-2 text-muted-foreground mt-2">
-                    <Calendar className="w-4 h-4" />
+                  <h1 className="text-xl md:text-3xl lg:text-4xl font-display font-bold leading-tight">{project.title}</h1>
+                  <div className="flex items-center gap-2 text-muted-foreground mt-2 text-xs md:text-base">
+                    <Calendar className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     <span>{project.date}</span>
                   </div>
                 </div>
@@ -369,21 +376,21 @@ const ProjectDetail = () => {
             </div>
 
             {/* Project Overview (New or Old) */}
-            <div className="glass-card p-8 mb-8">
-              <h2 className="text-xl font-semibold mb-4">Project Overview</h2>
-              <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
+            <div className="glass-card p-5 md:p-8 mb-6 md:mb-8">
+              <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Project Overview</h2>
+              <p className="text-sm md:text-base text-muted-foreground whitespace-pre-line leading-relaxed">
                 {project.projectOverview || project.fullDescription}
               </p>
             </div>
 
             {/* Business Questions (New) */}
             {project.businessQuestions && (
-              <div className="glass-card p-8 mb-8">
-                <h2 className="text-xl font-semibold mb-4">Key Business Questions Answered</h2>
-                <ul className="space-y-3">
+              <div className="glass-card p-5 md:p-8 mb-6 md:mb-8">
+                <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Key Business Questions Answered</h2>
+                <ul className="space-y-2 md:space-y-3">
                   {project.businessQuestions.map((q: string) => (
-                    <li key={q} className="flex items-start gap-3">
-                      <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                    <li key={q} className="flex items-start gap-3 text-sm md:text-base">
+                      <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                       <span className="text-muted-foreground">{q}</span>
                     </li>
                   ))}
@@ -393,19 +400,19 @@ const ProjectDetail = () => {
 
             {/* Dashboards (New) */}
             {project.dashboards && (
-              <div className="glass-card p-8 mb-8">
-                <h2 className="text-xl font-semibold mb-6">Dashboards Included</h2>
-                <div className="space-y-8">
+              <div className="glass-card p-5 md:p-8 mb-6 md:mb-8">
+                <h2 className="text-lg md:text-xl font-semibold mb-4 md:mb-6">Dashboards Included</h2>
+                <div className="space-y-6 md:space-y-8">
                   {project.dashboards.map((dashboard: any) => (
                     <div key={dashboard.title} className="space-y-4">
                       {/* Grid with Title+Desc on Left, Image on Right */}
-                      <div className="grid md:grid-cols-2 gap-6 items-start">
-                        <div className="space-y-4">
-                          <h3 className="text-lg font-medium text-primary">{dashboard.title}</h3>
-                          <ul className="space-y-2">
+                      <div className="grid md:grid-cols-2 gap-4 md:gap-6 items-start">
+                        <div className="space-y-3 md:space-y-4">
+                          <h3 className="text-base md:text-lg font-medium text-primary">{dashboard.title}</h3>
+                          <ul className="space-y-1.5 md:space-y-2">
                             {dashboard.description.map((desc: string) => (
-                              <li key={desc} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                <span className="w-1.5 h-1.5 rounded-full bg-white/20 mt-2 flex-shrink-0" />
+                              <li key={desc} className="flex items-start gap-2 text-xs md:text-sm text-muted-foreground">
+                                <span className="w-1.5 h-1.5 rounded-full bg-white/20 mt-1.5 flex-shrink-0" />
                                 <span>{desc}</span>
                               </li>
                             ))}
@@ -432,12 +439,12 @@ const ProjectDetail = () => {
 
             {/* Dataset Attributes (New) */}
             {project.datasetAttributes && (
-              <div className="glass-card p-6 mb-8">
-                <h2 className="text-xl font-semibold mb-4">Dataset</h2>
-                <p className="text-muted-foreground mb-4">Used car listings with attributes like:</p>
+              <div className="glass-card p-5 md:p-6 mb-6 md:mb-8">
+                <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Dataset</h2>
+                <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">Used car listings with attributes like:</p>
                 <div className="flex flex-wrap gap-2">
                   {project.datasetAttributes.map((attr: string) => (
-                    <span key={attr} className="px-3 py-1.5 rounded-md bg-muted/50 text-sm text-muted-foreground border border-white/5">
+                    <span key={attr} className="px-2.5 py-1 md:px-3 md:py-1.5 rounded-md bg-muted/50 text-xs md:text-sm text-muted-foreground border border-white/5">
                       {attr}
                     </span>
                   ))}
@@ -447,12 +454,12 @@ const ProjectDetail = () => {
 
             {/* Key Insights (New) or Standard Highlights */}
             {(project.keyInsights || project.highlights) && (
-              <div className="glass-card p-8 mb-8">
-                <h2 className="text-xl font-semibold mb-4">{project.keyInsights ? 'Key Insights' : 'Key Features'}</h2>
-                <ul className="space-y-3">
+              <div className="glass-card p-5 md:p-8 mb-6 md:mb-8">
+                <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">{project.keyInsights ? 'Key Insights' : 'Key Features'}</h2>
+                <ul className="space-y-2 md:space-y-3">
                   {(project.keyInsights || project.highlights).map((item: string) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                    <li key={item} className="flex items-start gap-3 text-sm md:text-base">
+                      <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                       <span className="text-muted-foreground">{item}</span>
                     </li>
                   ))}

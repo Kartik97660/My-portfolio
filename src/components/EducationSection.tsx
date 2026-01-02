@@ -38,7 +38,7 @@ const EducationSection = () => {
         <h2 className="section-title">
           <span className="text-foreground">Education</span>
         </h2>
-        <p className="section-subtitle">
+        <p className="section-subtitle hidden md:block">
           My academic journey and qualifications
         </p>
 
@@ -63,8 +63,8 @@ const EducationSection = () => {
                 {/* Header Row - Status & GPA */}
                 <div className="flex items-center justify-between mb-5">
                   <span className={`px-3 py-1 rounded-md text-xs font-semibold ${edu.status === 'Current'
-                      ? 'bg-primary/20 text-primary'
-                      : 'bg-muted text-muted-foreground'
+                    ? 'bg-primary/20 text-primary'
+                    : 'bg-muted text-muted-foreground'
                     }`}>
                     {edu.status}
                   </span>

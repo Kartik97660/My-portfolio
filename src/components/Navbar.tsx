@@ -56,6 +56,28 @@ const Navbar = () => {
     }
   };
 
+  const checkActive = (item: typeof navItems[0]) => {
+    // If on homepage, use the scroll spy activeSection
+    if (isHomePage) {
+      return activeSection === item.href.slice(1);
+    }
+
+    // If on subpages, check the path
+    const section = item.href.slice(1);
+
+    // Special case for Blogs (covers /blogs list and /blog/:id detail)
+    if (section === 'blogs') {
+      return location.pathname.startsWith('/blog');
+    }
+
+    // Special case for Projects (covers /project/:id)
+    if (section === 'projects') {
+      return location.pathname.startsWith('/project');
+    }
+
+    return false;
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/90 backdrop-blur-md border-b border-border' : ''}`}>
       <div className="container mx-auto px-4">
@@ -72,7 +94,7 @@ const Navbar = () => {
               <button
                 key={item.label}
                 onClick={() => scrollToSection(item.href)}
-                className={`nav-link ${isHomePage && activeSection === item.href.slice(1) ? 'active' : ''}`}
+                className={`nav-link ${checkActive(item) ? 'active' : ''}`}
               >
                 {item.label}
               </button>
@@ -117,7 +139,7 @@ const Navbar = () => {
               <button
                 key={item.label}
                 onClick={() => scrollToSection(item.href)}
-                className={`nav-link text-left ${activeSection === item.href.slice(1) ? 'active' : ''}`}
+                className={`nav-link text-left ${checkActive(item) ? 'active' : ''}`}
               >
                 {item.label}
               </button>

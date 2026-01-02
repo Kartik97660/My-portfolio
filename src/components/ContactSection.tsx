@@ -64,7 +64,7 @@ const ContactSection = () => {
         <h2 className="section-title">
           Get in <span className="text-gradient">Touch</span>
         </h2>
-        <p className="section-subtitle">
+        <p className="section-subtitle hidden md:block">
           Have a question or want to work together? Feel free to reach out!
         </p>
 
@@ -90,9 +90,9 @@ const ContactSection = () => {
             ))}
 
             {/* Social Links */}
-            <div className="glass-card p-6 mt-4">
+            <div className="glass-card p-8 md:p-10 hidden md:block">
               <h3 className="font-semibold mb-4">Connect with me</h3>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {socialLinks.map((link) => (
                   <a
                     key={link.label}
