@@ -5,9 +5,20 @@ const ScrollToTop = () => {
     const { pathname, hash } = useLocation();
 
     useEffect(() => {
-        // If there is a hash, scroll to the element
-        if (hash) {
-            // Small timeout to ensure DOM is ready
+        const scrollToId = sessionStorage.getItem('scrollToId');
+
+        if (scrollToId) {
+            // Scroll to specific element ID from session storage
+            setTimeout(() => {
+                const element = document.getElementById(scrollToId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    // Clear the storage so refresh goes to top
+                    sessionStorage.removeItem('scrollToId');
+                }
+            }, 100);
+        } else if (hash) {
+            // Normal hash scrolling
             setTimeout(() => {
                 const element = document.getElementById(hash.slice(1));
                 if (element) {
@@ -15,7 +26,7 @@ const ScrollToTop = () => {
                 }
             }, 100);
         } else {
-            // If no hash, scroll to top
+            // Scroll to top
             window.scrollTo(0, 0);
         }
     }, [pathname, hash]);

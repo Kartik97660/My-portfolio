@@ -45,7 +45,7 @@ const softSkills = [
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="py-20 md:py-32">
+    <section id="skills" className="py-12 md:py-20">
       <div className="container mx-auto px-4">
         <h2 className="section-title">
           Technical <span className="text-gradient">Skills</span>

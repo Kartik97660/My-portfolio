@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Github, Calendar, TrendingUp, BarChart3, LineChart, Database, Maximize2, X } from 'lucide-react';
+import { useParams, Link, useLocation } from 'react-router-dom';
+import { ArrowLeft, Github, Calendar, TrendingUp, BarChart3, LineChart, Database, Maximize2, X, PieChart, Activity } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -81,6 +81,70 @@ const projects = {
       'LPG and Diesel cars tend to have higher average KM driven, indicating usage intensity.',
       'Mileage and power show an inverse relationship beyond a threshold — no free lunch.'
     ]
+  },
+  'revenue-tracker': {
+    title: 'Revenue Growth Tracker',
+    date: 'December 2025',
+    icon: PieChart,
+    iconColor: 'bg-blue-500/20 text-blue-400',
+    description: 'Strategic financial dashboard tracking revenue streams, profit margins, and year-over-year growth performance.',
+    fullDescription: `A strategic financial dashboard designed to track revenue streams, profit margins, and year-over-year growth performance. This tool provides a clear view of financial health and growth opportunities.
+
+    Key focus areas include:
+    - **Revenue Streams**: detailed breakdown of revenue sources.
+    - **Profit Margins**: analysis of gross and net profit margins.
+    - **YoY Growth**: year-over-year performance comparison.`,
+    highlights: [
+      'Comprehensive revenue tracking',
+      'Profit margin analysis',
+      'Year-over-year growth comparison',
+      'Regional performance breakdown',
+      'Product category performance',
+    ],
+    tech: ['Power BI', 'Excel', 'DAX'],
+    github: 'https://github.com/Kartik97660',
+    challenges: [
+      'Consolidating financial data from multiple sources',
+      'Handling different currencies and exchange rates',
+      'Creating accurate forecasting models',
+    ],
+    outcomes: [
+      'Improved financial visibility',
+      'Better resource allocation',
+      'Identified underperforming revenue streams',
+    ],
+  },
+  'logistics-opt': {
+    title: 'Logistics Optimization',
+    date: 'December 2025',
+    icon: Activity,
+    iconColor: 'bg-orange-500/20 text-orange-400',
+    description: 'Supply chain visibility tool monitoring inventory turnover, fleet efficiency, and delivery timelines.',
+    fullDescription: `A supply chain visibility tool developed to monitor inventory turnover, fleet efficiency, and delivery timelines. This solution aims to optimize logistics operations and reduce costs.
+
+    Key focus areas include:
+    - **Inventory Turnover**: tracking stock levels and turnover rates.
+    - **Fleet Efficiency**: monitoring vehicle usage and maintenance.
+    - **Delivery Timelines**: analyzing delivery performance and delays.`,
+    highlights: [
+      'Real-time inventory tracking',
+      'Fleet utilization analysis',
+      'Delivery performance monitoring',
+      'Route optimization suggestions',
+      'Cost per delivery analysis',
+    ],
+    tech: ['SQL', 'Python', 'Tableau'],
+    github: 'https://github.com/Kartik97660',
+    challenges: [
+      'Integrating with legacy warehouse systems',
+      'Real-time data processing latency',
+      'Visualizing complex route data',
+    ],
+    outcomes: [
+      'Reduced inventory holding costs',
+      'Improved delivery on-time rates',
+      'Optimized fleet usage',
+    ],
   },
   'market-analytics': {
     title: 'Market Analytics Dashboard',
@@ -211,6 +275,7 @@ interface Project {
 
 const ProjectDetail = () => {
   const { projectId } = useParams<{ projectId: string }>();
+  const location = useLocation();
   // State for image lightbox
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -241,10 +306,32 @@ const ProjectDetail = () => {
       <main className="pt-24 pb-20">
         <div className="container mx-auto px-4">
           {/* Back Button */}
-          <Link to="/#projects" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors">
+          <Link
+            to="/"
+            onClick={() => {
+              const returnId = (location.state as any)?.returnId;
+              if (returnId) {
+                sessionStorage.setItem('scrollToId', returnId);
+              }
+            }}
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors"
+          >
             <ArrowLeft className="w-4 h-4" />
             Back to Projects
           </Link>
+
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6 font-mono">
+            <span className="opacity-60">Projects</span>
+            <span className="opacity-40">/</span>
+            <span className={(location.state as any)?.categoryTitle ? "text-foreground" : "opacity-60"}>
+              {(location.state as any)?.categoryTitle || 'All Categories'}
+            </span>
+            <span className="opacity-40">/</span>
+            <span className="text-primary font-medium truncate max-w-[200px] md:max-w-md">
+              {project.title}
+            </span>
+          </div>
 
           {/* Header */}
           <div className="max-w-4xl mx-auto">
@@ -252,7 +339,7 @@ const ProjectDetail = () => {
               <div className={`icon-box-lg ${project.iconColor}`}>
                 <IconComponent className="w-6 h-6" />
               </div>
-              <div className="flex-1 flex justify-between items-start gap-4">
+              <div className="flex-1 flex flex-col md:flex-row justify-between items-start gap-4 md:gap-8">
                 <div>
                   <h1 className="text-3xl md:text-4xl font-display font-bold">{project.title}</h1>
                   <div className="flex items-center gap-2 text-muted-foreground mt-2">
@@ -264,7 +351,7 @@ const ProjectDetail = () => {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 font-medium text-sm w-fit mt-12 flex-shrink-0"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 font-medium text-sm w-fit mt-4 md:mt-0 flex-shrink-0"
                 >
                   <Github className="w-4 h-4" />
                   View Code

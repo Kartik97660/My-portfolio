@@ -59,7 +59,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32">
+    <section id="contact" className="py-12 md:py-20">
       <div className="container mx-auto px-4">
         <h2 className="section-title">
           Get in <span className="text-gradient">Touch</span>

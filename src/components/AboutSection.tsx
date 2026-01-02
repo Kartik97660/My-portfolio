@@ -63,7 +63,7 @@ const highlights = [
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 md:py-32">
+    <section id="about" className="py-12 md:py-20">
       <div className="container mx-auto px-4">
         {/* Highlight Cards */}
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">

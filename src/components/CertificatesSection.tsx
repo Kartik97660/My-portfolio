@@ -45,19 +45,10 @@ const issuers = [
 
 const CertificatesSection = () => {
   return (
-    <section id="certificates" className="py-20 md:py-32">
+    <section id="certificates" className="py-12 md:py-20">
       <div className="container mx-auto px-4">
         {/* Stats */}
-        <div className="flex justify-center gap-12 mb-8">
-          <div className="text-center">
-            <span className="text-3xl md:text-4xl font-display font-bold text-primary">5</span>
-            <p className="text-sm text-muted-foreground mt-1">Certifications</p>
-          </div>
-          <div className="text-center">
-            <span className="text-3xl md:text-4xl font-display font-bold text-primary">2</span>
-            <p className="text-sm text-muted-foreground mt-1">Organizations</p>
-          </div>
-        </div>
+
 
         <h2 className="section-title">
           <span className="text-gradient">Certificates</span>
@@ -73,18 +64,18 @@ const CertificatesSection = () => {
               <div className={`icon-box-lg mb-4 ${cert.color}`}>
                 <Award className="w-6 h-6" />
               </div>
-              
+
               <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">
                 {cert.title}
               </h3>
-              
+
               <p className="text-primary text-sm font-medium mb-3">{cert.issuer}</p>
-              
+
               <div className="flex items-center gap-1 text-sm text-muted-foreground mb-4">
                 <Calendar className="w-4 h-4" />
                 <span>{cert.date}</span>
               </div>
-              
+
               <a
                 href={cert.link}
                 className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
